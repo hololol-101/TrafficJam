@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import HelloWorld from "@/components/HelloWorld.vue";
-import TestPage from "@/components/TestPage.vue";
+import LoginPage from "@/components/LoginPage.vue";
 Vue.use(VueRouter);
 
 export default new VueRouter({
@@ -14,6 +14,6 @@ export default new VueRouter({
         component: HelloWorld,
     }, {
         path: '/login',
-        component: TestPage
+        component: LoginPage
     }]
 });

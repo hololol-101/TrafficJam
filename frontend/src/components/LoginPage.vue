@@ -10,17 +10,19 @@
                 <h1 style="text-align: center" class="mb-10">Login</h1>
                 <form>
                   <v-text-field
+                      v-model="id"
                       label="ID"
                       prepend-inner-icon="mdi-account"
                   ></v-text-field>
                   <v-text-field
+                      v-model="password"
                       prepend-inner-icon="mdi-lock"
                       type="password"
                       label="Password"
                   >
                   </v-text-field>
                   <v-btn
-                      type="submit"
+                      @click="submit"
                       color="blue lighten-1 text-capitalize"
                       depressed
                       large
@@ -51,13 +53,49 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
+      id:null
+
+      , password:null
     };
   },
   components: {},
   computed: {},
-  methods: {},
+  methods: {
+    submit() {
+      axios.get(
+        "http://localhost:8081/login",
+          {params: {
+              id: this.id
+              , password: this.password
+            }
+          }
+      ).then(result => {
+          alert("결과:" + result.data)
+        }).catch(error => {
+          alert(error)
+        })
+
+      }
+,
+    addUserShow(){
+      const fd = {
+        id:this.id,
+        password:this.password
+      }
+      axios.post('http://localhost:8081/login', fd,
+          {
+            headers: { "Content-Type": "multipart/form-data"},
+          }).then(result => {
+        alert("결과: "+result.data)
+      })
+
+    }
+
+  },
+
 };
 </script>
