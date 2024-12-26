@@ -48,7 +48,6 @@ export default {
   data() {
     return {
       id:null
-
       , password:null
     };
   },
@@ -56,6 +55,14 @@ export default {
   computed: {},
   methods: {
     submit() {
+      if(this.id == null){
+        alert("아이디를 입력해주세요");
+        return;
+      }else if(this.password == null){
+        alert("비밀번호를 입력해주세요");
+        return;
+      }
+
       axios.get(
         "http://localhost:8081/login",
           {params: {
