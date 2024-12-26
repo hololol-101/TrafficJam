@@ -23,7 +23,7 @@
                   </v-text-field>
                   <v-btn
                       @click="submit"
-                      color="blue lighten-1 text-capitalize"
+                      color="primary text-capitalize"
                       depressed
                       large
                       block
@@ -31,16 +31,6 @@
                       class="mb-3"
                   >
                     Login
-                  </v-btn>
-                  <v-btn
-                      @click="addUserShow"
-                      color="blue lighten-1 text-capitalize"
-                      depressed
-                      large
-                      block
-                      dark
-                  >
-                    Sign Up
                   </v-btn>
                 </form>
               </div>
@@ -80,21 +70,6 @@ export default {
         })
 
       }
-,
-    addUserShow(){
-      const fd = {
-        id:this.id,
-        password:this.password
-      }
-      axios.post('http://localhost:8081/login', fd,
-          {
-            headers: { "Content-Type": "multipart/form-data"},
-          }).then(result => {
-        alert("결과: "+result.data)
-      })
-
-    }
-
   },
 
 };
