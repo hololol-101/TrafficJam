@@ -23,7 +23,7 @@
                   </v-text-field>
                   <v-btn
                       @click="submit"
-                      color="blue lighten-1 text-capitalize"
+                      color="primary text-capitalize"
                       depressed
                       large
                       block
@@ -31,16 +31,6 @@
                       class="mb-3"
                   >
                     Login
-                  </v-btn>
-                  <v-btn
-                      @click="addUserShow"
-                      color="blue lighten-1 text-capitalize"
-                      depressed
-                      large
-                      block
-                      dark
-                  >
-                    Sign Up
                   </v-btn>
                 </form>
               </div>
@@ -58,7 +48,6 @@ export default {
   data() {
     return {
       id:null
-
       , password:null
     };
   },
@@ -66,6 +55,14 @@ export default {
   computed: {},
   methods: {
     submit() {
+      if(this.id == null){
+        alert("아이디를 입력해주세요");
+        return;
+      }else if(this.password == null){
+        alert("비밀번호를 입력해주세요");
+        return;
+      }
+
       axios.get(
         "http://localhost:8081/login",
           {params: {
@@ -80,21 +77,6 @@ export default {
         })
 
       }
-,
-    addUserShow(){
-      const fd = {
-        id:this.id,
-        password:this.password
-      }
-      axios.post('http://localhost:8081/login', fd,
-          {
-            headers: { "Content-Type": "multipart/form-data"},
-          }).then(result => {
-        alert("결과: "+result.data)
-      })
-
-    }
-
   },
 
 };
