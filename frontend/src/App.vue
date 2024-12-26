@@ -45,6 +45,8 @@ export default {
         { title: 'Login', link: '/login' },
         { title: 'Order', link: '/order' },
         { title: 'Pay', link: '/pay' },
+        { title: 'PaySuccess', link: '/paysuccess' },
+        { title: 'PayFail', link: '/payfail' },
       ],
       right: null,
     }
