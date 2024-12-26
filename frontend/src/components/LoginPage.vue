@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-main class="blue-grey lighten-4">
+    <v-main class="secondary">
       <!-- Login Component -->
       <v-container style="max-width: 450px" fill-height>
         <v-layout align-center row wrap>
