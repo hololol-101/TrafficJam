@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-row>
+    <v-row dense>
         <v-navigation-drawer permanent>
           <v-list-item>
             <v-list-item-content>
@@ -28,8 +28,10 @@
             </v-list-item>
           </v-list>
         </v-navigation-drawer>
-      <v-col>
-        <router-view></router-view>
+      <v-col dense>
+        <div dense>
+          <router-view></router-view>
+        </div>
       </v-col>
     </v-row>
   </div>
