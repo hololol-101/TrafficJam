@@ -71,8 +71,16 @@ export default {
             }
           }
       ).then(result => {
-          alert("결과:" + result.data)
-        }).catch(error => {
+          if(result.data<0){
+            alert("아이디/비밀번호를 확인해주세요");
+            return;
+          }else{
+            this.$router.push('/home');
+            this.$router.push({name:'order', params:{cid:result.data}} );
+          }
+
+
+      }).catch(error => {
           alert(error)
         })
 
