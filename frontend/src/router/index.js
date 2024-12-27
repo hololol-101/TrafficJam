@@ -24,6 +24,7 @@ export default new VueRouter({
         component: LoginPage
     },{
         path: '/loading',
+        name: 'loading',
         component: LoadingPage
     }, {
         path: '/order',
