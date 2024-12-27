@@ -41,7 +41,7 @@
             <v-col
                 cols="4" class="mr-10">
 
-              <v-text-field v-model="itemNum"
+              <v-text-field v-model="quantity"
                             type="number"
                             solo
                             reverse
@@ -53,10 +53,10 @@
           </v-row>
           <v-divider></v-divider>
           &emsp;
-          <v-row class="mr-15">
+          <v-row class="mr-15" justify="center">
 
             <v-col><h3>충액</h3></v-col>
-            <v-col align="center"><h3 class="grey--text">{{itemNum}}</h3></v-col>
+            <v-col align="center"><h3 class="grey--text">{{quantity}}</h3></v-col>
             <v-col align="center"><h3>*</h3> </v-col>
             <v-col align="center"><h3 class="grey--text">$ 75</h3></v-col>
             <v-col align="center"><h3> = </h3></v-col>
@@ -84,8 +84,9 @@ import axios from "axios";
 export default {
   data() {
     return {
-      itemNum: 1,
+      quantity: 1,
       pid: 1225,
+      cid: this.$route.params.cid,
       items: [
         {
           src: "./tri0.png"
@@ -103,29 +104,43 @@ export default {
   },
   computed: {
     totalSum: function (){
-      return this.itemNum * 75;
+      return this.quantity * 75;
     }
   }
   ,
   methods: {
     increment() {
-      this.itemNum = parseInt(this.itemNum, 10) + 1
+      this.quantity = parseInt(this.quantity, 10) + 1
     },
     decrement() {
-      this.itemNum = parseInt(this.itemNum, 10) - 1
+      this.quantity = parseInt(this.quantity, 10) - 1
     },
     submit() {
+      var cid = this.cid;
+      var pid = this.pid;
+      var quantity = this.quantity;
+      alert(this.cid);
       axios.get(
           "http://localhost:8081/order",
           {params: {
               pid: this.pid
-              ,quantity: this.itemNum
+              ,quantity: this.quantity
             }
           }
       ).then(result => {
-        alert("결과:" + result.data)
+        if(result.data.status == "success"){
+          this.$router.push('/home');
+          this.$router.push({name:'pay', params:{cid:cid, pid:pid, quantity:quantity}} );
+        }else if(result.data.status == "fail"){
+          alert("제품 수량이 부족합니다.")
+        }else{
+          this.$router.push('/home')
+          this.$router.push({name:'loading', params:{cid:cid, pid:pid, quantity:quantity}} );
+        }
       }).catch(error => {
         alert(error)
+        this.$router.push('/home')
+        this.$router.push({name:'pay', params:{cid:cid, pid:pid, quantity:quantity}} )
       })
     }
   }
