@@ -1,5 +1,6 @@
 package com.lotte.lottExit.service;
 
+import com.lotte.lottExit.mapper.MemberMapper;
 import com.lotte.lottExit.model.Member;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,8 @@ public class MemberService {
     public MemberService() {
         memberList = new ArrayList<>();
     }
+
+    MemberMapper memberMapper;
     public boolean registerMember(Member member){
         for(Member m:memberList){
             if (m.getId().equals(member.getId())){
@@ -29,6 +32,16 @@ public class MemberService {
             }
         }
         return false;
+    }
+
+    public boolean checkPassword(String id, String password){
+        Member mem = memberMapper.getMember(id);
+
+        if(mem.getPassword().equals(password)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lotte.lottExit.mapper.OrderMapper">
+    <select id="makeOrder" resultType="HashMap">
+        INSERT INTO ORDER
+            ( ONO
+            , CNO
+            , PNO
+            , QUANTITY
+            , ODR_DTTI
+            , STATUS
+            , FST_CRT_DTTI
+            , LT_CH_DTTI)
+        VALUES
+            ( #{ONO}
+            , #{CNO}
+            , #{PNO}
+            , #{QUANTITY}
+            , SYSDATE
+            , #{STATUS}
+            , SYSDATE
+            , SYSDATE);
+    </select>
+</mapper>

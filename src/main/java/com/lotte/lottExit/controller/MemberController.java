@@ -16,9 +16,14 @@ public class MemberController {
     @GetMapping("/login")
     public String Login(@RequestParam("id") String id,
                         @RequestParam("password") String password) {
-        if(memberService.checkMember(id, password)){
+//        if(memberService.checkMember(id, password)){
+//            return "Success";
+//        }
+
+        if(memberService.checkPassword(id, password)){
             return "Success";
         }
+
 
         return "false";
 
